@@ -4,27 +4,28 @@ package gesp;
  * @author silvuss
  */
 class SyntacticMarker {
-	private String openingMarker;
-	private String closingMarker;
 
-	public SyntacticMarker(String openingMarker, String closingMarker) {
-		this.setOpeningMarker(openingMarker);
-		this.setClosingMarker(closingMarker);
-	}
+    private String openingMarker;
+    private String closingMarker;
 
-	public String getOpeningMarker() {
-		return this.openingMarker;
-	}
+    public SyntacticMarker(String openingMarker, String closingMarker) {
+        this.setOpeningMarker(openingMarker);
+        this.setClosingMarker(closingMarker);
+    }
 
-	public void setOpeningMarker(String openingMarker) {
-		this.openingMarker = openingMarker;
-	}
+    public String getOpeningMarker() {
+        return this.openingMarker;
+    }
 
-	public String getClosingMarker() {
-		return this.closingMarker;
-	}
+    public void setOpeningMarker(String openingMarker) {
+        this.openingMarker = openingMarker;
+    }
 
-	public void setClosingMarker(String closingMarker) {
-		this.closingMarker = closingMarker;
-	}
+    public String getClosingMarker() {
+        return this.closingMarker;
+    }
+
+    public void setClosingMarker(String closingMarker) {
+        this.closingMarker = closingMarker;
+    }
 }

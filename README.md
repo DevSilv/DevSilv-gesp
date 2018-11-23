@@ -37,7 +37,7 @@ this utility works in the following way:
 
 3. it analyses the content looking for speeches. currently, in the context of this utility, a speech is defined as a pieces of text within a specified pair of characters called _syntactic speech markers_. examples of syntactic speech markers are `""` or `«»` (each character of each pair is one _marker_). a pair of markers contains one opening and one closing marker. the utility also gets small pieces of text before and after the speech, and the whole result piece of text is called _extended speech_.
 
-4. for each found extended speech, it checks whether it contains any word from a specific list of set of words. each set is called one _semantic speech marker_. the set may contain one or many elements. examples of a semantic speech marker are "says" (one marker, one word) or "have said" (one marker, two words). semantics speech markers may come not only from the English language; see the "current supported semantic speech markers" section below.
+4. for each found extended speech, it checks whether it contains any word from a specific list of set of words. each set is called one _semantic speech marker_. the set may contain one or many elements. examples of a semantic speech marker are "says" (one marker, and one word) or "have said" (one marker, but two words). semantics speech markers may come not only from the English language; see the "current supported semantic speech markers" section below.
 
 5. all the extended speeches that contain any semantic speech marker are written to the output.
 
@@ -51,30 +51,53 @@ currently, there is supported only one pair of syntactic speech markers.
 
 ## current supported semantic speech markers
 
-currently, there are supported only Polish semantic speech markers.
+what words a semantic speech marker may contain, depends highly on its language. currently, there are supported only Polish semantic speech markers.
 
-in the table below, the words in one marker are divided by spaces, and the markers are divided by commas. the term _base word_ is used to specify an informal group of markers – only in order to improve readability of the whole list of markers.
+a Polish semantic speech marker may be a _normal semantic speech marker_ or a _base semantic speech marker_. each base semantic speech marker constitutes a particular group\* of normal semantic speech markers. a base marker also belongs to the group that its constitutes.
 
-|group nr|language|base word\*|speech markers\*\*|
-|-|-|-|-|
-|1|Polish|rzec|rzec, rzekę, rzeczesz, rzecze, rzeczemy, rzeczecie, rzeką, rzekł, rzekła, rzekło, rzekliśmy, rzekłyśmy, rzekliście, rzekłyście, rzekli, rzekły|
-|2|Polish|mówić|mówić, mówię, mówisz, mówi, mówimy, mówicie, mówią, mówiłem, mówiłeś, mówił, mówiła, mówiło, mówiliśmy, mówiłyśmy, mówiliście, mówiłyście, mówili, mówiły|
-|3|Polish|powiedzieć|powiedzieć, powiedziałem, powiedziałeś, powiedział, powiedziała, powiedziało, powiedzieliśmy, powiedziałyśmy, powiedzieliście, powiedziałyście, powiedzieli, powiedziały|
-|4|Polish|wołać|wołać, wołam, wołasz, woła, wołamy, wołacie, wołają, wołałem, wołałeś, wołał, wołała, wołało, wołaliśmy, wołałyśmy, wołaliście, wołałyście, wołali, wołały|
-|5|Polish|gadać|gadać, gadam, gadasz, gada, gadamy, gadacie, gadają, gadałem, gadałeś, gadał, gadała, gadało, gadaliśmy, gadałyśmy, gadaliście, gadałyście, gadali, gadały|
-|6|Polish|twierdzić|twierdzić, twierdzę, twierdzisz, twierdzi, twierdzimy, twierdzicie, twierdzą, twierdziłem, twierdziłeś, twierdził, twierdziła, twierdziło, twierdziliśmy, twierdziłyśmy, twierdziliście, twierdziłyście, twierdzili, twierdziły|
-|7|Polish|stwierdzać|stwierdzać, stwierdzam, stwierdzasz, stwierdza, stwierdzamy, stwierdzacie, stwierdzają, stwierdzić, stwierdziłem, stwierdziłeś, stwierdził, stwierdziła, stwierdziło, stwierdziliśmy, stwierdziłyśmy, stwierdziliście, stwierdziłyśmy, stwierdzili, stwierdziły|
-|8|Polish|jęczeć|jęczeć, jęczę, jęczysz, jęczy, jęczymy, jęczycie, jęczą|
-|9|Polish|jęknąć|jęknąć, jęknąłem, jęknąłeś, jęknął, jęknęła, jęknęło, jęknęliśmy, jęknęłyśmy, jęknęliście, jęknęłyście, jęknęli, jęknęły|
-|10|Polish|śmiać (the word "się" at the end is omitted)|śmiać, śmiałem, śmiałeś, śmiał, śmiała, śmiało, śmialiśmy, śmiałyśmy, śmialiście, śmiałyście, śmiali, śmiały|
+note that in this utility a "[word](https://en.wikipedia.org/wiki/Word)" is not only considered a set of letters; it also has a **meaning**. therefore, if markers (normal or base) in different groups include the same set of characters (i.e. they seem to be the same set of words), they are treated as separate markers. unfortunately, currently I do not know any example of such a situation.
 
-\* I do not know the exact representation of a "base word" term in linguistics, but the closest seems to be "[lemma](https://en.wikipedia.org/wiki/Lemma_(morphology))".
+currently, all the Polish markers are verbs. therefore, a group of normal markers is created performing [_conjugation_](https://en.wikipedia.org/wiki/Grammatical_conjugation)\*\* on the appropriate words of the base marker that constitutes that group. the conjugation used in this utility includes for each base marker:
+- all [persons](https://en.wikipedia.org/wiki/Grammatical_person) (e.g. "mówię", "mówisz");
+- all [numbers](https://en.wikipedia.org/wiki/Grammatical_number) (e.g. "mówię", "mówimy");
+- all [genders](https://en.wikipedia.org/wiki/Grammatical_gender) (e.g. "mówił", "mówiła");
+- present and past [tenses](https://en.wikipedia.org/wiki/Grammatical_tense) – where appropriate (e.g. "mówię", "mówiłem");
+- [aspects](https://en.wikipedia.org/wiki/Grammatical_aspect) – where appropriate; note that usually, in case of this utility if a verb has multiple forms that differ only on aspect, either some of them are not included (because they can be found using another form – e.g. "wykrzyczeć", "krzyczeć"), or they are treated as separate markers;
+- [moods](https://en.wikipedia.org/wiki/Grammatical_mood) – where appropriate (e.g. "mówię", "mówiłbym");
+- [voices](https://en.wikipedia.org/wiki/Voice_(grammar)) – where appropriate (e.g. "X said to Y", "Y was said").
 
-\*\* I do not know the exact term that would describe in linguistics the set of the speech markers that I list here. the closest term seems to be "[lexeme](https://en.wikipedia.org/wiki/Lexeme)" – understood as a **set** of forms of a word. therefore, a particular set of words that I list here would be a subset of a particular lexeme.
+|group nr|base marker language|base marker\*\*\*|
+|-|-|-|
+|1|Polish|rzec|
+|2|Polish|mówić|
+|3|Polish|powiedzieć|
+|4|Polish|powiadać|
+|5|Polish|wołać|
+|6|Polish|gadać|
+|7|Polish|twierdzić|
+|8|Polish|stwierdzać|
+|9|Polish|jęczeć|
+|10|Polish|jęknąć|
+|11|Polish|śmiać (the word "się" at the end is omitted)|
+|12|Polish|mawiać|
+|13|Polish|wrzeszczeć|
+|14|Polish|wrzasnąć|
+|15|Polish|krzyczeć|
+|16|Polish|krzyknąć|
+|17|Polish|słyszeć|
+|18|Polish|słuchać|
 
-## current problems with determining speeches
+\* I do not know the exact term that would describe in linguistics such a group. the closest term seems to be "[lexeme](https://en.wikipedia.org/wiki/Lexeme)" – understood as a **set** of forms of a word. therefore, a particular group of normal markers would be created based on a subset of a particular lexeme, created from a verb within its base semantic marker.
 
-unfortunately, currently not all the possible locations of speeches in a text are handled. the number of speeches that can be found depends on the form that they are written in. the more common (general) the form, the closer the number and bounds of speeches will be to the expected state. it is possible that the number of speeches will be greater than expected, as well as that it will be smaller.
+\*\* for details, one may also see the more general term "[inflection](https://en.wikipedia.org/wiki/Inflection)".
+
+\*\*\* I do not know the exact representation of the "base marker" term in linguistics, but the closest seems to be "[lemma](https://en.wikipedia.org/wiki/Lemma_(morphology))".
+
+## problems with determining speeches
+
+unfortunately, not all the possible locations of speeches in a text are handled. the number of speeches that can be found depends on the form that they are written in. the more common (general) the form, the closer the number and bounds of speeches will be to the expected state. it is possible that the number of speeches will be greater than expected, as well as that it will be smaller.
+
+### I
 
 for example, let us take a situation like this (this is an excerpt from the "[Pan Tadeusz](https://en.wikipedia.org/wiki/Pan_Tadeusz)" poem):
 
@@ -93,9 +116,38 @@ in order to make this utility work for this text, there are only three ways that
 - the extended speech may contain several pieces of text within syntactic speech markers (that is, the speech may be split into multiple parts), or
 - the set of rules that this utility uses should be most probably aligned somehow to this poem's style.\*\*\*
 
-the first condition is impossible to fulfil, since the text may contain also proper names. I am not about to try to fulfil the second condition (at least now) because it will probably be too much effort for such a small program. the third condition seems to be too specific.
+the first condition is impossible to fulfill, since the text may contain also proper names. I am not about to try to fulfil the second condition (at least now) because it will probably be too much effort for such a small program. the third condition seems to be too specific.
 
 \*\*\* this may bring to mind [neural networks](https://en.wikipedia.org/wiki/Neural_network) as a solution, but writing this utility, it was not my purpose to implement them.
+
+### II
+
+another situation that does not let handle all the possible locations of speeches is that the utility presumes that semantic speech markers occurs always in one of the following three locations:
+1. in the sentence before the sentence that the speech is starting in;
+2. in the same sentence that the speech is starting or ending in;
+3. in the sentence after the sentence that the speech is ending in.
+
+according to that, if a semantic speech marker related to a speech is used e.g. two sentences before the sentence that the speech is starting in, it **will not** be found. therefore, this speech **will not** be present in the results.
+
+### III
+
+for example, let us take such a situation (this is also an excerpt from the "[Pan Tadeusz](https://en.wikipedia.org/wiki/Pan_Tadeusz)" poem):
+
+```
+Rykow jadł smaczno, mało wdawał się w rozmowę
+(...)
+Obaczcież, co się stało w końcu z Bonapartą..."
+
+Tu Ryków przerwał i jadł; wtem z potrawą czwartą
+Wszedł służący, i raptem boczne drzwi otwarto.
+
+Weszła nowa osoba, przystojna i młoda;
+Jej zjawienie się nagłe, jej wzrost i uroda,
+Jej ubiór zwrócił oczy; wszyscy ją witali;
+Prócz Tadeusza, widać, że ją wszyscy znali.
+```
+
+here, one may be unsure whether the sentence that the speech is ending in is being continued after it or not – that is, whether the text `Tu Ryków przerwał` starts a new sentence or not. this utility assumes that these words **does not** start a new sentence. therefore, if these words are intended to start a new sentence, the extended speech containing this speech will be one sentence longer than expected. since generally in such cases more words are better than few, this usually should not be a problem (apart from some situations, I believe, not described in this README; if one will encounter them, please let me know in the issues).
 
 ## tools and technologies used
 
@@ -111,7 +163,9 @@ among many other, the following sources was useful for me when writing this READ
 - http://baxtercommunications.nl/quotation-marks-multi-paragraph-rule/
 - https://english.stackexchange.com/questions/347859/where-do-i-put-the-quotation-marks-when-im-quoting-a-character-over-multiple-st
 - https://stackoverflow.com/questions/32943179/most-elegant-way-to-join-a-map-to-a-string-in-java-8
+- https://stackoverflow.com/a/12853618
+- https://stackoverflow.com/a/14602089
 
 ## I have experienced a bug / a problem, or I have an idea of improvement – what can I do?
 
-in case you have experienced any bug, any problem or just have an idea how to improve this utility, do not be afraid of report it within this project using the github's functinality (issues).
+in case you have experienced any bug, any problem or just have an idea how to improve this utility, do not be afraid of report it within this project using the github's functionality (issues).
