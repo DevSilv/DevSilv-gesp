@@ -1,4 +1,4 @@
-# gesp – get speeches from text
+# gesp – Get speeches from text
 
 gesp (GEt SPeeches) is a utility that allows the user get the speeches (from monologues and dialogs) that a given text contains. By a speech, one should understand the third meaning of [this speech definition](https://www.dictionary.com/browse/speech).
 
@@ -15,25 +15,22 @@ gesp (GEt SPeeches) is a utility that allows the user get the speeches (from mon
 7. [Supported semantic speech markers](#supported-semantic-speech-markers)
 8. [Current major problems](#current-major-problems)
 9. [Tools and technologies used](#tools-and-technologies-used)
-10. [I have experienced a bug / a problem, or I have an idea of improvement – what can I do?](#i-have-experienced-a-bug-/-a-problem-or-i-have-an-idea-of-improvement-–-what-can-i-do)
-11. [Sources that I was using](#sources-that-i-was-using)
-12. [Will this project be updated?](#will-this-project-be-updated)
+10. [Sources](#sources)
 
 ## Copyright note
 
-Note that this "silvuss-thoughts" project (this repository) has currently **no license**, as explained in [this GitHub guide on licensing projects](https://choosealicense.com/no-permission/).
+Note that this "gesp" project (this repository) has currently **no license**, as explained in [this GitHub guide on licensing projects](https://choosealicense.com/no-permission/).
 
 For your convenience, I am including below a quote from that site:
-
 > When you make a creative work (which includes code), the work is under exclusive copyright by default. Unless you include a license that specifies otherwise, nobody else can use, copy, distribute, or modify your work without being at risk of take-downs, shake-downs, or litigation. Once the work has other contributors (each a copyright holder), “nobody” starts including you.
 
 Also note that I can add a lincese in the future if it would be relevant to the needs of this project.
 
 ## Disclaimers
 
-**This application is an example application that is intended to show my skills in programming in the Java language.** Its purpose is only to show code that is know to work. While probably nothing dangerous would happen, you may run it only under your own responsibility.
+**This application is an example application that is not intended to be run.** Its purpose is only to show code that is know to work. While probably nothing dangerous would happen, you may run it only under your own responsibility.
 
-Although I have made efforts to make it work as intended and described, it is not a "proffesional" application. Specifically, it was not tested in terms of separate unit tests or similar. It was tested to work only on one platform. Specifically, it deals with memory, and that never may be safe at all. For details on the platform, see the section ["Tools and technologies used"](#tools-and-technologies-used) of this readme.
+Although I have made efforts to make it work as intended and described, it is not a "proffessional" application. Specifically, it was not tested in terms of separate unit tests or similar. It was tested to work only on one platform. For details on the platform, see the section ["Environment, tools and technologies used"](#environment-tools-and-technologies-used) of this README.
 
 ## How does this utility work?
 
@@ -179,27 +176,20 @@ Prócz Tadeusza, widać, że ją wszyscy znali.
 
 Here, one may be unsure whether the sentence that the speech is ending in is being continued after it or not – that is, whether the text `Tu Ryków przerwał` starts a new sentence or not. this utility assumes that these words **does not** start a new sentence. Therefore, if these words are intended to start a new sentence, the extended speech containing this speech will be one sentence longer than expected. Since generally in such cases more words are better than few, this usually should not be a problem (apart from some situations, I believe, not described in this README; if one will encounter them, please let me know in the issues).
 
-## Tools and technologies used
+## Environment, tools and technologies used
 
 1. This utility is written 100% in the [Java programming language](https://en.wikipedia.org/wiki/Java_(programming_language)), version 11.
 2. To check regular expression correctness, I have used the [regex101](https://regex101.com/) online tool (accessed Nov 2018).
+3. The operating system used to compile and test it is Linux; distribution: [Fedora](https://getfedora.org/) Workstation 29; [kernel](https://www.kernel.org/) version: 4.19.6-300.fc29.x86_64.
+4. The architecture of the processor used to run the operating system is x86-64.
 
-## Sources that I was using
+## Sources
 
-Among many other, the following sources was useful for me when writing this README. Maybe they could also be useful for someone else:
 - https://en.wikipedia.org/wiki/List_of_Unicode_characters
 - https://english.stackexchange.com/questions/2288/how-should-i-use-quotation-marks-in-sections-of-multiline-dialogue
 - https://english.stackexchange.com/questions/96608/why-does-the-multi-paragraph-quotation-rule-exist
 - http://baxtercommunications.nl/quotation-marks-multi-paragraph-rule/
 - https://english.stackexchange.com/questions/347859/where-do-i-put-the-quotation-marks-when-im-quoting-a-character-over-multiple-st
 - https://stackoverflow.com/questions/32943179/most-elegant-way-to-join-a-map-to-a-string-in-java-8
-- https://stackoverflow.com/a/12853618
-- https://stackoverflow.com/a/14602089
-
-## I have experienced a bug / a problem, or I have an idea of improvement – what can I do?
-
-In case you have experienced any bug, any problem or just have an idea how to improve this utility, you may report it within this project using the GitHub Issues.
-
-## Will this project be updated?
-
-If you have found any bug or have an idea, it may be incorporated to let the project live. But, generally, this project is going to show what I have learned in Java by the time that it was published – so, it is not supposed to be updated greatly.
+- https://stackoverflow.com/questions/12853595/how-to-add-elements-of-a-string-array-to-a-string-array-list/
+- https://stackoverflow.com/questions/14602062/java-string-split-removed-empty-values/
