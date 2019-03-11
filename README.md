@@ -110,6 +110,7 @@ Currently, there are supported only Polish semantic speech markers. In Polish, s
 ### Base semantic speech markers
 
 Currently supported Polish base markers are as follows:
+
 |No.|Base marker\*\*|Remarks|
 |-|-|-|
 |1|rzec|Old use. Only in perfective aspect; an imperfective equivalent in the English language would be mostly "to say".|
