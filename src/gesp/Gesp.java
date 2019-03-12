@@ -50,7 +50,6 @@ public class Gesp {
 
     private static String getText(File inputFile) throws IOException {
         Path path = inputFile.toPath();
-        // TODO: does the readAllBytes read in UTF-8?
         byte[] bytes = Files.readAllBytes(path);
         return new String(bytes);
     }
@@ -116,8 +115,7 @@ public class Gesp {
     public static void main(String[] args) {
         try {
             // General application parameteres
-            // TODO: move these parameteres to a more
-            // appropriate place (e.g. a JSON configuration file)
+            
             String outputFilePath = "src/gesp/tests/output.txt";
             String semanticMarkersDictionaryFilePath = "src/gesp/semantic-speech-markers-dictionary";
 
