@@ -89,13 +89,11 @@ There is supported only one pair of syntactic speech markers.
 
 |No.|Opening marker character|Opening marker Unicode code|Closing marker character|Closing marker Unicode code|Remarks|
 |-|-|-|-|-|-|
-|1|`"`|U+0022|`"`|U+0022|Note that some texts may contain very similar, but different quotation marks: U+201C (`“`) and U+201D (`”`).|
+|1|`"`|U+0022|`"`|U+0022|Note that some texts may contain very similar, but different quotation marks: U+201C (`“`) and U+201D (`”`). They are not supported.|
 
 ## Supported semantic speech markers
 
-What words a semantic speech marker may contain, depends highly on its language.
-
-In some languages, a semantic speech marker may be of two types: a _base semantic speech marker_ or a _normal semantic speech marker_. Each base semantic speech marker constitutes a particular set\* of normal semantic speech markers. A base semantic speech marker also belongs to the group that it constitutes. For example, in the Polish language, a base semantic speech marker is "mówić", and it constitutes the set of markers "mówię", "mówisz", and so on, according to the inflection of the Polish language.
+What words a semantic speech marker may contain, depends on its language. In some languages, a semantic speech marker may be of two types: a _base semantic speech marker_ or a _normal semantic speech marker_. Each base semantic speech marker constitutes a particular set\* of normal semantic speech markers. A base semantic speech marker also belongs to the group that it constitutes. For example, in Polish, a base semantic speech marker is "mówić", and it constitutes the set of markers "mówię", "mówisz", and so on, according to the inflection of the Polish language.
 
 **Note:** in this utility, a "[word](https://en.wikipedia.org/wiki/Word)" is not only considered a set of letters; it also has a **meaning**. Therefore, in a hypothetic situation, if markers (normal or base) in different groups would seem to be the same set of words, they would be treated as separate markers.
 
@@ -113,9 +111,9 @@ Currently supported Polish base markers are as follows:
 
 |No.|Base marker\*\*|Remarks|
 |-|-|-|
-|1|rzec|Old use. Only in perfective aspect; an imperfective equivalent in the English language would be mostly "to say".|
+|1|rzec|Old use. Only in perfective aspect; an imperfective equivalent in English would be mostly "to say".|
 |2|mówić|Eng. "to say", "to tell", "to speak", "to talk", and similar.|
-|3|powiedzieć|Today only in perfective aspect. An imperfective equivalent in the English language would be mostly "to say".|
+|3|powiedzieć|Today only in perfective aspect. An imperfective equivalent in English would be mostly "to say".|
 |4|powiadać|Old use. A [frequentative form](https://en.wikipedia.org/wiki/Frequentative#Polish) (and also the imperfective aspect) of the verb "powiedzieć" (see). Eng. "to say" as in "She always says that...".|
 |5|wołać|Eng. "to call", "to cry", and similar.|
 |6|gadać|Eng. "to talk", "to chat", and similar.|
