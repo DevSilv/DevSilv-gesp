@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/silvuss/silvuss-gesp.svg?branch=master)](https://travis-ci.org/silvuss/silvuss-gesp)
+
 # gesp – Get speeches from text
 
 gesp (GEt SPeeches) is a utility that allows the user get the speeches (from monologues and dialogs) that a given text contains. By a speech, one should understand anything that is spoken: a monologue (or part of it), part of a dialogue etc. (see also the third meaning of the [speech definition by dictionary.com](https://www.dictionary.com/browse/speech)).
