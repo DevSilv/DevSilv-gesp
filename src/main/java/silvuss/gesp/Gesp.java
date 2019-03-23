@@ -1,4 +1,4 @@
-package gesp;
+package silvuss.gesp;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -81,6 +81,16 @@ public class Gesp {
         // Match sentences with quotation marks containing
         // at least one of semanticMarkersRegexes.
         int i = 0;
+        // The same regex as below, but not escaped:
+        // (?:(?<=^)|(?<=(?:\.|\?|!)\s)|(?<=(?:\.|\?|!)"\n)|(?<=(?:\.|\?|!)"\n\n))
+        // (?:[^".!?]+(?:\.|\?|!){1,3})?
+        // [^".!?]*
+        // "
+        // [^"]+
+        // (?:(?<=\n\n)"?[^"]+)*
+        // (?:(?:(?<=\.|\?|!)"(?:[^".!?]*(?:\.|\?|!){1,3})?)|(?:"[^".!?]*(?:\.|\?|!){1,3}))
+        // (?:[^".!?]+(?:\.|\?|!){1,3})?
+        // (?:(?=\s)|(?=$)|(?="))
         String sentencesAroundQuotesRegex = "(?is)(?:(?<=^)|(?<=(?:\\.|\\?|!)\\s)|(?<=(?:\\.|\\?|!)\"\\n)|(?<=(?:\\.|\\?|!)\"\\n\\n))(?:[^\".!?]+(?:\\.|\\?|!){1,3})?[^\".!?]*\"[^\"]+(?:(?<=\\n\\n)\"?[^\"]+)*(?:(?:(?<=\\.|\\?|!)\"(?:[^\".!?]*(?:\\.|\\?|!){1,3})?)|(?:\"[^\".!?]*(?:\\.|\\?|!){1,3}))(?:[^\".!?]+(?:\\.|\\?|!){1,3})?(?:(?=\\s)|(?=$)|(?=\"))";
         Pattern sentencesAroundQuotesPattern = Pattern.compile(sentencesAroundQuotesRegex);
         Matcher sentencesAroundQuotesMatcher = sentencesAroundQuotesPattern.matcher(text);
@@ -93,7 +103,7 @@ public class Gesp {
             }
         }
 
-        // The following outputString contains
+        // The following "outputString" contains
         // two hyphens as the results separator,
         // because GNU grep uses this separator.
         String outputString = String.join("\n--\n", outputStrings);
@@ -107,38 +117,44 @@ public class Gesp {
             throw new Error(
                     "File or directory with the provided output file name already exists: \"" + outputFile + "\"");
         }
-        // The "CREATE_NEW" option used below causes the write method
+        // The following "CREATE_NEW" option causes the write method
         // to fail if the specified file exists.
         Files.write(outputFile.toPath(), outputString.getBytes(), StandardOpenOption.CREATE_NEW);
     }
 
     public static void main(String[] args) {
         try {
-            // General application parameteres
-            
+            // General application parameteres.
+
             String outputFilePath = "src/gesp/tests/output.txt";
             String semanticMarkersDictionaryFilePath = "src/gesp/semantic-speech-markers-dictionary";
 
             // Input processing.
 
             System.out.println("(1/3) Processing input... ");
+
             File inputFile = getInputFile(args);
             File semanticMarkersDictionaryFile = getSemanticMarkersDictionaryFile(semanticMarkersDictionaryFilePath);
 
             String text = getText(inputFile);
             List<SemanticMarker> semanticMarkers = getSemanticMarkers(semanticMarkersDictionaryFile);
+
             System.out.println("(1/3) Done processing input.");
 
             // Main processing.
 
             System.out.println("(2/3) Processing text... ");
+
             String resultText = processText(text, semanticMarkers);
+
             System.out.println("(2/3) Done processing text.");
 
             // Output processing.
 
             System.out.println("(3/3) Creating output file... ");
+
             createOutputFile(outputFilePath, resultText);
+
             System.out.println("(3/3) Done. Exiting.");
 
         } catch (Throwable t) {
@@ -147,5 +163,4 @@ public class Gesp {
             System.err.println("Exiting.");
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package gesp;
+package silvuss.gesp;
 
 /**
  * @author silvuss
